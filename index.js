@@ -15,11 +15,10 @@
  * Bu fonskiyon 'asas' dönmeli(return)
 */
 
-function ilkiniDon(stringArray, callback) {
-  return callback(stringArray[0])
+function ilkiniDon(callback) {
+  return callback("asd")
 }
-console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin+metin}));
-
+console.log('örnek görev:', ilkiniDon(function(metin){return metin+metin}));
 // Başlangıç Challenge'ı Sonu
 
 
@@ -30,7 +29,7 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+  sds
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
   
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
@@ -64,11 +63,14 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+    return Math.floor(Math.random() * 16)+10;
 }
-
-
+let i=0
+while(i<10){
+  console.log(takimSkoru());
+  i+=1;
+}
 
 
 /* Görev 3: macSonucu() 
@@ -86,8 +88,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(callback,çeyrekSayısı){
+  
+  let evSahibi=0;
+  let konukTakim=0;
+
+  for(let i=0;i<çeyrekSayısı;i++){
+    evSahibi+=callback();
+    konukTakim+=callback();
+   
+  }
+  return {
+    "EvSahibi": evSahibi,
+    "KonukTakim": konukTakim
+  };
 }
 
 
@@ -109,9 +123,16 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(callback) {
+  
+  let evSahibi=callback();
+  let konukTakim=callback();
 
+  
+  return {
+    "EvSahibi": evSahibi,
+    "KonukTakim": konukTakim
+  };
 }
 
 
@@ -146,12 +167,26 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function skorTabelasi(callback,callback1,çeyrekSayısı) {
+  let array=[];
+  for(let i=0;i<çeyrekSayısı;i++){
+   
+    array.push=i+1 +". Periyot:" + callback(callback1);
+   
+  }
+
+  return array;
 }
 
+console.log(skorTabelasi(function(callback){ let evSahibi=callback();
+  let konukTakim=callback();
 
-
+  
+  return {
+    "EvSahibi": evSahibi,
+    "KonukTakim": konukTakim
+  };},function(){return Math.floor(Math.random() * 16)+10;},4))
+console.log("");
 
 /* Aşağıdaki satırları lütfen değiştirmeyiniz*/
 function sa(){
